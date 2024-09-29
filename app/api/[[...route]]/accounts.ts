@@ -34,7 +34,7 @@ const app = new Hono()
         name: true,
       })
     ),
-    (c) => {
+    async (c) => {
       const auth = getAuth(c);
       const values = c.req.valid("json");
 
