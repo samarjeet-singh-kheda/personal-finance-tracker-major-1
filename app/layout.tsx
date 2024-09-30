@@ -39,10 +39,9 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <QueryProvider>
-            <SheetProvider>
-              <Toaster />
-              {children}
-            </SheetProvider>
+            <SheetProvider />
+            <Toaster richColors theme="light" />
+            {children}
           </QueryProvider>
         </body>
       </html>
