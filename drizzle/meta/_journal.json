@@ -15,6 +15,13 @@
       "when": 1727570070164,
       "tag": "0001_bored_morg",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1727656786390,
+      "tag": "0002_bright_gamora",
+      "breakpoints": true
     }
   ]
 }
