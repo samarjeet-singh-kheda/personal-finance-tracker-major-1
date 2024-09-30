@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Hono } from "hono";
-import { parse, subDays } from "date-fns";
+import { parse, subDays, addDays } from "date-fns";
 import { and, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
 import { zValidator } from "@hono/zod-validator";
@@ -34,8 +34,9 @@ const app = new Hono()
         return c.json({ error: "unauthorized user" }, 401);
       }
 
-      const defaultTo = new Date();
-      const defaultFrom = subDays(defaultTo, 30);
+      const today = new Date();
+      const defaultTo = addDays(today, 30);
+      const defaultFrom = subDays(today, 30);
 
       const startDate = from
         ? parse(from, "yyyy-MM-dd", new Date())

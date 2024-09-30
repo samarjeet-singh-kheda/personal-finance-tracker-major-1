@@ -43,7 +43,7 @@ function TransactionsPage() {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-2xl line-clamp-1">
-            Transactions Page
+            Transactions History
           </CardTitle>
 
           <Button onClick={newTransaction.onOpen} size="sm">

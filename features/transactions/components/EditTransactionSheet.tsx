@@ -17,8 +17,8 @@ import { useDeleteTransaction } from "../api/useDeleteTransaction";
 import { useConfirm } from "@/hooks/useConfirm";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formSchema = insertTransactionSchema.pick({
-  name: true,
+const formSchema = insertTransactionSchema.omit({
+  id: true,
 });
 
 type FormValues = z.infer<typeof formSchema>;
