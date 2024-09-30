@@ -7,19 +7,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2, Plus } from "lucide-react";
 import { columns } from "./colums";
 
-import { useNewCategory } from "@/features/categories/hooks/useNewCategory";
-import { useGetCategories } from "@/features/categories/api/useGetCategories";
-import { useBulkDeleteCategories } from "@/features/categories/api/useBulkDeleteCategories";
+import { useNewTransaction } from "@/features/transactions/hooks/useNewTransaction";
+import { useGetTransactions } from "@/features/transactions/api/useGetTransactions";
+import { useBulkDeleteTransactions } from "@/features/transactions/api/useBulkDeleteTransactions";
 
-function CategoriesPage() {
-  const newCategory = useNewCategory();
-  const deleteCategories = useBulkDeleteCategories();
-  const categoriesQuery = useGetCategories();
-  const categories = categoriesQuery.data || [];
+function TransactionsPage() {
+  const newTransaction = useNewTransaction();
+  const deleteTransactions = useBulkDeleteTransactions();
+  const transactionsQuery = useGetTransactions();
+  const transactions = transactionsQuery.data || [];
 
-  const isDisabled = categoriesQuery.isLoading || deleteCategories.isPending;
+  const isDisabled =
+    transactionsQuery.isLoading || deleteTransactions.isPending;
 
-  if (categoriesQuery.isLoading) {
+  if (transactionsQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
@@ -42,10 +43,10 @@ function CategoriesPage() {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-2xl line-clamp-1">
-            Categories Page
+            Transactions Page
           </CardTitle>
 
-          <Button onClick={newCategory.onOpen} size="sm">
+          <Button onClick={newTransaction.onOpen} size="sm">
             <Plus className="size-4 mr-2" /> Add new
           </Button>
         </CardHeader>
@@ -54,11 +55,11 @@ function CategoriesPage() {
           <DataTable
             filterKey="name"
             columns={columns}
-            data={categories}
+            data={transactions}
             onDelete={(rows) => {
               const ids = rows.map((r) => r.original.id);
 
-              deleteCategories.mutate({ ids });
+              deleteTransactions.mutate({ ids });
             }}
             disabled={isDisabled}
           />
@@ -68,4 +69,4 @@ function CategoriesPage() {
   );
 }
 
-export default CategoriesPage;
+export default TransactionsPage;
