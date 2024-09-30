@@ -2,7 +2,7 @@ import { z } from "zod";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertAccountSchema } from "@/db/schema";
+import { insertCategorySchema } from "@/db/schema";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategorySchema.pick({
   name: true,
 });
 
@@ -28,7 +28,7 @@ type Props = {
   disabled?: boolean;
 };
 
-function AccountForm({
+function CategoryForm({
   id,
   defaultValues,
   onSubmit,
@@ -63,7 +63,7 @@ function AccountForm({
               <FormControl>
                 <Input
                   disabled={disabled}
-                  placeholder="e.g. Cash, Bank, Credit Card"
+                  placeholder="e.g. Food, travel etc."
                   {...field}
                 />
               </FormControl>
@@ -72,7 +72,7 @@ function AccountForm({
         />
 
         <Button className="w-full" disabled={disabled}>
-          {id ? "Save changes" : "Create account"}
+          {id ? "Save changes" : "Create category"}
         </Button>
 
         {!!id && (
@@ -83,7 +83,7 @@ function AccountForm({
             className="w-full"
             variant="outline"
           >
-            <Trash className="mr-2 size-4" /> Delete account
+            <Trash className="mr-2 size-4" /> Delete category
           </Button>
         )}
       </form>
@@ -91,4 +91,4 @@ function AccountForm({
   );
 }
 
-export default AccountForm;
+export default CategoryForm;
