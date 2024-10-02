@@ -68,6 +68,7 @@ export const AmountInput = ({
         decimalsLimit={2}
         onValueChange={onChange}
         disabled={disabled}
+        intlConfig={{ locale: "en-IN", currency: "INR" }}
       />
 
       <p className="mt-2 text-xs text-muted-foreground">
