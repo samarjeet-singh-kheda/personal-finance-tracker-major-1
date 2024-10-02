@@ -1,40 +1,12 @@
 {
-  "version": "5",
-  "dialect": "pg",
+  "version": "7",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1727569415041,
-      "tag": "0000_greedy_talos",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1727570070164,
-      "tag": "0001_bored_morg",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1727656786390,
-      "tag": "0002_bright_gamora",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1727711309435,
-      "tag": "0003_condemned_black_tom",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1727734924463,
-      "tag": "0004_adorable_xavin",
+      "version": "7",
+      "when": 1727895757765,
+      "tag": "0000_milky_zzzax",
       "breakpoints": true
     }
   ]
