@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/DataTable";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2, Plus } from "lucide-react";
-import { columns } from "./colums";
+import { columns } from "./columns";
 
 import { useNewAccount } from "@/features/accounts/hooks/useNewAccount";
 import { useGetAccounts } from "@/features/accounts/api/useGetAccounts";
