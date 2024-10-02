@@ -80,6 +80,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
     };
 
     const arrayOfData = mappedData.body.map((row) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return row.reduce((acc: any, cell, idx) => {
         const header = mappedData.headers[idx];
 

@@ -1,18 +1,23 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DataTable } from "@/components/DataTable";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
 import { Loader2, Plus } from "lucide-react";
-import { columns } from "./colums";
-
 import { useNewTransaction } from "@/features/transactions/hooks/useNewTransaction";
 import { useGetTransactions } from "@/features/transactions/api/useGetTransactions";
 import { useBulkDeleteTransactions } from "@/features/transactions/api/useBulkDeleteTransactions";
-import { useState } from "react";
-import { UploadButton } from "./UploadButton";
+
+import { transactions as transactionsSchema } from "@/db/schema";
+import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/DataTable";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { columns } from "./columns";
 import { ImportCard } from "./ImportCard";
+import { UploadButton } from "./UploadButton";
+import { useSelectAccount } from "@/features/accounts/hooks/useSelectAccount";
+import { toast } from "sonner";
+import { useBulkCreateTransactions } from "@/features/transactions/api/useBulkCreateTransactions";
 
 enum VARIANTS {
   LIST = "LIST",
@@ -26,6 +31,7 @@ const INITIAL_IMPORT_RESULTS = {
 };
 
 function TransactionsPage() {
+  const [AccountDialog, confirm] = useSelectAccount();
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
   // const [variant, setVariant] = useState<VARIANTS>(VARIANTS.IMPORT);
   const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
@@ -43,11 +49,33 @@ function TransactionsPage() {
 
   const newTransaction = useNewTransaction();
   const deleteTransactions = useBulkDeleteTransactions();
+  const createTransactions = useBulkCreateTransactions();
   const transactionsQuery = useGetTransactions();
   const transactions = transactionsQuery.data || [];
 
   const isDisabled =
     transactionsQuery.isLoading || deleteTransactions.isPending;
+
+  const onSubmitImport = async (
+    values: (typeof transactionsSchema.$inferInsert)[]
+  ) => {
+    const accountId = await confirm();
+
+    if (!accountId) {
+      return toast.error("Please select an account to continue.");
+    }
+
+    const data = values.map((value) => ({
+      ...value,
+      accountId: accountId as string,
+    }));
+
+    createTransactions.mutate(data, {
+      onSuccess: () => {
+        onCancelImport();
+      },
+    });
+  };
 
   if (transactionsQuery.isLoading) {
     return (
@@ -70,10 +98,11 @@ function TransactionsPage() {
   if (variant === VARIANTS.IMPORT) {
     return (
       <>
+        <AccountDialog />
         <ImportCard
           data={importResults.data}
           onCancel={onCancelImport}
-          onSubmit={() => {}}
+          onSubmit={onSubmitImport}
         />
       </>
     );

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/DataTable";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2, Plus } from "lucide-react";
-import { columns } from "./colums";
+import { columns } from "./columns";
 
 import { useNewCategory } from "@/features/categories/hooks/useNewCategory";
 import { useGetCategories } from "@/features/categories/api/useGetCategories";
