@@ -3,7 +3,7 @@ import { accounts, categories, transactions } from "@/db/schema";
 import { calculatePercentChange, fillMissingDays } from "@/lib/utils";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
-import { addDays, differenceInDays, parse, subDays } from "date-fns";
+import { differenceInDays, parse, subDays } from "date-fns";
 import { and, desc, eq, gte, lt, lte, sql, sum } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -27,9 +27,8 @@ const app = new Hono().get(
       return c.json({ error: "unauthorized user" }, 401);
     }
 
-    const today = new Date();
-    const defaultTo = addDays(today, 30);
-    const defaultFrom = subDays(today, 30);
+    const defaultTo = new Date();
+    const defaultFrom = subDays(defaultTo, 30);
 
     const startDate = from
       ? parse(from, "yyyy-MM-dd", new Date())
@@ -161,7 +160,7 @@ const app = new Hono().get(
       data: {
         remainingAmount: currentPeriod.remaining,
         remainingChange,
-        incomeAmount: currentPeriod.remaining,
+        incomeAmount: currentPeriod.income,
         incomeChange,
         expensesAmount: currentPeriod.expenses,
         expensesChange,

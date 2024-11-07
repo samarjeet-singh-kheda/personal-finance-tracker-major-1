@@ -1,4 +1,3 @@
-import { transactions } from "@/db/schema";
 import { client } from "@/lib/hono";
 import { convertAmountFromMiliunits } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +10,6 @@ export const useGetTransactions = () => {
   const accountId = params.get("accountId") || "";
 
   const query = useQuery({
-    //TODO: check if params are needed in the key
     queryKey: ["transactions", { from, to, accountId }],
     queryFn: async () => {
       const response = await client.api.transactions.$get({
