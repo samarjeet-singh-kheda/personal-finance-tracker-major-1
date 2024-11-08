@@ -5,8 +5,8 @@ import { useMedia } from "react-use";
 import { usePathname, useRouter } from "next/navigation";
 
 import NavButton from "./NavButton";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 
 const routes = [
