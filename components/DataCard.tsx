@@ -95,7 +95,8 @@ function DataCard({
             percentChange < 0 && "text-rose-500"
           )}
         >
-          {formatPercentage(percentChange)} from last period
+          {formatPercentage(percentChange, { addPrefix: true })} from last
+          period
         </p>
       </CardContent>
     </Card>
