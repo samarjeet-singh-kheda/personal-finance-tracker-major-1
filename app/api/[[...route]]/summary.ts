@@ -44,7 +44,7 @@ const app = new Hono().get(
       startDate: Date,
       endDate: Date
     ) {
-      return db
+      return await db
         .select({
           income:
             sql`SUM(CASE WHEN ${transactions.amount} >= 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
@@ -60,7 +60,7 @@ const app = new Hono().get(
         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
         .where(
           and(
-            accountId ? eq(transactions.id, accountId) : undefined,
+            accountId ? eq(transactions.accountId, accountId) : undefined,
             eq(accounts.userId, userId),
             gte(transactions.date, startDate),
             lte(transactions.date, endDate)
@@ -122,6 +122,7 @@ const app = new Hono().get(
     );
 
     const finalCategories = topCategories;
+
     if (otherCategories.length > 0) {
       finalCategories.push({
         name: "Other",
