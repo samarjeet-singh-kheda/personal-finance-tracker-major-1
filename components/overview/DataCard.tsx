@@ -1,16 +1,16 @@
 import { IconType } from "react-icons";
 import { VariantProps, cva } from "class-variance-authority";
 
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 import { cn, formatCurrency, formatPercentage } from "@/lib/utils";
-import { CountUp } from "./CountUp";
+import { CountUp } from "../charts/CountUp";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const boxVariant = cva("shrink-0 rounded-md p-3", {
